@@ -1,0 +1,18 @@
+services:
+  generate:
+    build: 
+      context: ./generate
+      dockerfile: Dockerfile
+    volumes:
+      - ./shared_data:/app/files
+  show:
+    build: 
+      context: ./show
+      dockerfile: Dockerfile
+    working_dir: /app 
+    volumes:
+      - ./shared_data:/app/files
+    depends_on:
+      - generate
+volumes:
+  shared_data:
